@@ -10,8 +10,8 @@ const form = document.querySelector('#form');
 
 form.addEventListener("submit", e => {
     e.preventDefault();
-    if(itTask.value = ""){
-        creatTask(itTask.value);
+    if(itTask.value !== ""){
+        createTask(itTask.value);
         itTask.value = "";
 
     }
@@ -24,4 +24,20 @@ function createTask(value){
         title: value,
         completed: false,
     };
+    tasks.unshift(newTask);
 }
+function renderTasks(){
+    const html = tasks.map(task => {
+        return `
+        <div class="task">
+        <div class="completed">${task.completed ? `<span class="done">Done</span>` : `<button class="start-button" data-id="${task.id}">Start</button>`}</div>
+        <div class"title">${task.title}</div>
+        </div>
+        `
+        ;
+    });
+
+    const tasksConatainder = document.querySelector("#tasks");
+    tasksConatainder.innerHTML = html.join("");
+}
+    
